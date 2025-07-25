@@ -1,4 +1,5 @@
 class Ogrenci:
+    print("Ogrenci sınıfı calıstı..")
     ad= "----"
     soyad=""
     numara=""
@@ -6,6 +7,7 @@ class Ogrenci:
     disiplinCezasi= 0
     
     def bilgi(self):
+        print("------Metod calıstı..")
         print("Metod ile Adı: ",self.ad,"Soyadı: ",self.soyad,"Disiplin cezası: ",self.disiplinCezasi)
 
     def disiplinCezasiEkle(self,eklenecek):
@@ -20,4 +22,5 @@ ogrenci1.bilgi()
 Ogrenci.ad="Ali"
 ogrenci1.disiplinCezasiEkle(15)
 ogrenci1.bilgi()
+print("Sınıf varlıklarını gosterır:", Ogrenci.__dict__)
 

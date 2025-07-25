@@ -1,4 +1,5 @@
 class Ogrenci:
+    print("Ogrenci sınıfı calıstı..")
     ad= "----"
     soyad=""
     numara=""
