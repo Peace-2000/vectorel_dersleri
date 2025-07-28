@@ -1,58 +1,73 @@
-import sys
 from PyQt6.QtWidgets import *
-import ticari
 
-class LoginWindow(QMainWindow):
+class StokMenu(QMainWindow):
+    
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("STOK MODULU")
+        self.setFixedSize(500,300)
+        
+        icerik = QHBoxLayout()
+        icerik.addWidget(QLabel("STOK MODULU "))
+        icerik.addWidget(QLineEdit())
+        icerik.addWidget(QLabel("Sonuç: "))
+        
+        araclar = QWidget()
+        araclar.setLayout(icerik)
+        self.setCentralWidget(araclar)
+    
+    def dugmeBasma(self):
+        print(self.baslikkk," baslıklı pencerede dugmeye bastın")
 
-        self.setWindowTitle("Login Ekranı")
-        self.arayuz()
 
-    def arayuz(self):
-        central_widget = QWidget()
-        layout = QVBoxLayout()
 
-        label_username = QLabel("Kullanıcı Adı:")
-        self.username_input = QLineEdit()
-        layout.addWidget(label_username)
-        layout.addWidget(self.username_input)
+class AnaMenu(QMainWindow):
 
-        label_password = QLabel("Şifre:")
-        self.password_input = QLineEdit()
-        self.password_input.setEchoMode(QLineEdit.EchoMode.Password)
-        layout.addWidget(label_password)
-        layout.addWidget(self.password_input)
+    def __init__(self,baslik="Uygulama penceresi",e=500,b=300,rr="Cevir"):
+        super().__init__()
+        self.setWindowTitle(baslik)
+        # self.setFixedSize(e,b)
+        self.baslikkk= baslik
 
-        login_button = QPushButton("Giriş Yap")
-        login_button.clicked.connect(self.login)
-        layout.addWidget(login_button)
+        icerik = QVBoxLayout()
+        icerik.addWidget(QLabel("Ana Menu"))
+        
+        dugme1=QPushButton("Stok Modulu")
+        dugme1.clicked.connect(self.dugme1Basma)
+        icerik.addWidget(dugme1)
 
-        central_widget.setLayout(layout)
-        self.setCentralWidget(central_widget)
-
-    def login(self):
-        username = self.username_input.text()
-        password = self.password_input.text()
-
-        # Kullanıcı adı ve şifreyi kontrol etme - Örnek amaçlı basit bir kontrol
-        if username == "1" and password == "1":
-            self.open_ticari_window()
-
-        else:
-            QMessageBox.warning(self, "Hata", "Geçersiz kullanıcı adı veya şifre!")
-
-    def open_ticari_window(self):
-        QMessageBox.information(self, "Başarılı", "Giriş başarılı!\nANA PROGRAMDASINIZ.")
+        
+        dugme2=QPushButton("Fatura Modulu")
+        dugme2.clicked.connect(self.dugme2Basma)
+        icerik.addWidget(dugme2)
+        
+        dugme3=QPushButton("Cari Modulu")
+        dugme3.clicked.connect(self.dugme3Basma)
+        icerik.addWidget(dugme3)
+        
+        araclar = QWidget()
+        araclar.setLayout(icerik)
+        self.setCentralWidget(araclar)
+    
+    def dugme1Basma(self):
+        print("Dugme 1 basıldı")
         self.close()  # Login penceresini kapat
-        self.ticari_window = ticari.TicariWindow()
-        self.ticari_window.show()
+        self.stok_penceresi = StokMenu()
+        self.stok_penceresi.show()
 
-def main():
-    app = QApplication(sys.argv)
-    window = LoginWindow()
-    window.show()
-    sys.exit(app.exec())
+    def dugme2Basma(self):
+        print("Dugme 2 basıldı")
+        QMessageBox.information(self,"Basarılı","Fatura modülü kullanıma hazır değil")
 
-if __name__ == "__main__":
-    main()
+    def dugme3Basma(self):
+        print("Dugme 3 basıldı")
+
+    
+uygulama = QApplication([])
+
+pencere = AnaMenu("Program Ana Menusu")
+pencere.show()
+
+
+
+uygulama.exec() 
